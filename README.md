@@ -18,7 +18,7 @@ Característica: Mostrar Hola Mundo
     Entonces debería ver "Hola Mundo"
 ```
 
-References:
+References: \
 https://cucumber.io/docs/gherkin/reference \
 https://filiphric.com/cucumber-in-cypress-a-step-by-step-guide#adding-parameters-to-step-definitions
 
