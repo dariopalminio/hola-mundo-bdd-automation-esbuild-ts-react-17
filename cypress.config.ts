@@ -1,45 +1,41 @@
+
+
 import { defineConfig } from "cypress";
-import * as dotenv from "dotenv";
 import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
 import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-preprocessor";
-import { createEsbuildPlugin } from "@badeball/cypress-cucumber-preprocessor/esbuild";
-
-dotenv.config({ path: `.env.${process.env.NODE_ENV || "qa"}` });
+import createEsbuildPlugin from "@badeball/cypress-cucumber-preprocessor/esbuild";
 
 export default defineConfig({
   e2e: {
+    baseUrl: process.env.VITE_APP_URI || "http://localhost:5173/",
+    specPattern: "**/*.feature",
     viewportWidth: 1280,
     viewportHeight: 720,
     video: true,
     screenshotOnRunFailure: true,
-    experimentalMemoryManagement: true,
-    baseUrl: process.env.VITE_REDIRECT_URI || "http://localhost:5173/",
     chromeWebSecurity: false,
     trashAssetsBeforeRuns: true,
     testIsolation: true,
-    env: {
-      version: process.env.VITE_ENV || "qa",
-      TAGS: process.env.TAGS || "@Regression",
-    },
     retries: {
       runMode: 1,
       openMode: 0,
     },
-    defaultCommandTimeout: 10000,
-    setupNodeEvents: async (on, config) => {
-      // Configura el preprocesador de Cucumber
+    env: {
+      version: process.env.VITE_ENV || "qa",
+      TAGS: process.env.TAGS || "@Regression", //Si no se define TAGS en el comando de ejecución, se usará el valor predeterminado "@Regression".
+    },
+    async setupNodeEvents(
+      on: Cypress.PluginEvents,
+      config: Cypress.PluginConfigOptions
+    ): Promise<Cypress.PluginConfigOptions> {
       await addCucumberPreprocessorPlugin(on, config);
-
-      // Configura el bundler con esbuild
       on(
         "file:preprocessor",
         createBundler({
-          plugins: [createEsbuildPlugin(config)],
+          plugins: [createEsbuildPlugin.default(config)],
         })
       );
-
       return config;
     },
-    specPattern: "cypress/e2e/**/*.feature",
   },
 });
