@@ -5,6 +5,7 @@ Node v18.20.3
 npx 10.9.2
 React ^17.x
 typescript
+Cypress 13.17.0      
 
 
 #  Característica Gherkin implementada
