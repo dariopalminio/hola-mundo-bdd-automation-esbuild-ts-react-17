@@ -21,8 +21,10 @@ Característica: Mostrar página principal
 ```
 
 #  Instalar
+```
 npm install
 npx cypress install
+```
 
 #  Ejecutar prueba
 
