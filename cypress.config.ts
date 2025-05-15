@@ -7,7 +7,7 @@ import createEsbuildPlugin from "@badeball/cypress-cucumber-preprocessor/esbuild
 
 export default defineConfig({
   e2e: {
-    baseUrl: process.env.VITE_APP_URI || "http://localhost:5173/",
+    baseUrl: process.env.VITE_APP_TO_TEST_URI || "http://localhost:5173/",
     specPattern: "**/*.feature",
     viewportWidth: 1280,
     viewportHeight: 720,
