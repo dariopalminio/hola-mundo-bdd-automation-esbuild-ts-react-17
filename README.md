@@ -19,6 +19,23 @@ Característica: Mostrar Hola Mundo
     Entonces debería ver "Hola Mundo"
 ```
 
+#  Instalar
+npm install
+npx cypress install
+
+#  Ejecutar prueba
+
+Ejecutar en una terminal:
+```
+npm run dev
+```
+
+Ejecutar en otra terminal:
+```
+npm run test:e2e:open
+npm run test:e2e 
+```
+
 References: \
 https://cucumber.io/docs/gherkin/reference \
 https://filiphric.com/cucumber-in-cypress-a-step-by-step-guide#adding-parameters-to-step-definitions
